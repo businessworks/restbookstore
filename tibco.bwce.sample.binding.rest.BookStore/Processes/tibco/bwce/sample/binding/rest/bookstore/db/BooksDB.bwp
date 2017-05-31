@@ -462,10 +462,11 @@
             <wsdl:import namespace="http://xmlns.example.com/20140929140236"/>
         </wsdl:definitions>
     </tibex:Types>
-    <tibex:ProcessInfo createdBy="nshah"
+    <tibex:ProcessInfo callable="false" createdBy="nshah"
         createdOn="Mon Sep 29 14:02:36 IST 2014" description=""
-        modifiers="public" productVersion="1.2.0 V18 2014-09-27"
-        scalable="true" singleton="true" stateless="false" type="IT"/>
+        extraErrorVars="false" modifiers="public"
+        productVersion="1.2.0 V18 2014-09-27" scalable="true"
+        singleton="true" stateless="false" type="IT"/>
     <tibex:ProcessTemplateConfigurations/>
     <notation:Diagram measurementUnit="Pixel" type="BWProcess"
         xmlns:bwnotation="http://tns.tibco.com/bw/runtime/BWNotation"
@@ -1204,7 +1205,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@activities.2"/>
 
                                     <layoutConstraint
-                                    x="245"
+                                    x="318"
                                     xsi:type="notation:Bounds" y="10"/>
                                     </children>
 
@@ -1258,7 +1259,63 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@activities.3"/>
 
                                     <layoutConstraint
-                                    x="72"
+                                    x="174"
+                                    xsi:type="notation:Bounds" y="10"/>
+                                    </children>
+
+                                    <children type="4002 bw.generalactivities.bwassign">
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+
+                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@activities.4"/>
+
+                                    <layoutConstraint
+                                    height="40"
+                                    width="40"
+                                    x="44"
                                     xsi:type="notation:Bounds" y="10"/>
                                     </children>
 
@@ -2741,6 +2798,17 @@
             <element href="//0/@process/@activity/@activity/@activities.0/@messages.5/@activity/@activity/@links/@children.0"/>
             <bendpoints points="[25, 4, -154, 0]$[155, 0, -24, -4]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.1/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, -1, -105, 0]$[106, 0, -24, 1]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
     </notation:Diagram>
     <bpws:import importType="http://schemas.xmlsoap.org/wsdl/"
         location="../../../../../../../../Service%20Descriptors/BooksDBService.wsdl" namespace="http://xmlns.example.com/20140929140236"/>
@@ -2805,6 +2873,11 @@
         <bpws:variable element="ns12:jdbcQueryActivityInput"
             name="getRecentBooks-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns13:resultSet" name="getRecentBooks1" sca-bpel:internal="true"/>
+        <bpws:variable name="Discount" type="xsd:double">
+            <bpws:from>
+                <bpws:literal>10.0</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -3022,6 +3095,7 @@
                             <bpws:links>
                                 <bpws:link
                                     name="JDBCQueryTogetAllBooksOut" tibex:linkType="SUCCESS"/>
+                                <bpws:link name="SetDiscountTogetBooks" tibex:linkType="SUCCESS"/>
                             </bpws:links>
                             <bpws:empty name="OnMessageStart1"
                                 tibex:constructor="onMessageStart" tibex:xpdlId="00c97cfe-9655-4f44-93a2-745d4be182d2"/>
@@ -3033,10 +3107,10 @@
                                 portType="ns1:Service"
                                 tibex:xpdlId="15cf376e-a658-4457-92bf-cc25c1606497" variable="getAllBooksOut-input">
                                 <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20140929140236" xmlns:tns1="http://www.example.org/Books" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.0"&gt;&lt;xsl:param name="getBooks"/&gt;&lt;xsl:template name="getAllBooksOut-input" match="/"&gt;&lt;tns:getAllBooksResponse&gt;&lt;parameters&gt;&lt;tns1:Books&gt;&lt;xsl:for-each select="$getBooks/Record"&gt;&lt;tns1:Book&gt;&lt;xsl:if test="isbn"&gt;&lt;tns1:isbn&gt;&lt;xsl:value-of select="isbn"/&gt;&lt;/tns1:isbn&gt;&lt;/xsl:if&gt;&lt;xsl:if test="name"&gt;&lt;tns1:name&gt;&lt;xsl:value-of select="name"/&gt;&lt;/tns1:name&gt;&lt;/xsl:if&gt;&lt;xsl:if test="description"&gt;&lt;tns1:description&gt;&lt;xsl:value-of select="description"/&gt;&lt;/tns1:description&gt;&lt;/xsl:if&gt;&lt;xsl:if test="authorName"&gt;&lt;tns1:authorName&gt;&lt;xsl:value-of select="authorName"/&gt;&lt;/tns1:authorName&gt;&lt;/xsl:if&gt;&lt;xsl:if test="releaseDate"&gt;&lt;tns1:releaseDate&gt;&lt;xsl:value-of select="releaseDate"/&gt;&lt;/tns1:releaseDate&gt;&lt;/xsl:if&gt;&lt;xsl:if test="vintage"&gt;&lt;tns1:vintage&gt;&lt;xsl:value-of select="vintage"/&gt;&lt;/tns1:vintage&gt;&lt;/xsl:if&gt;&lt;xsl:if test="signed"&gt;&lt;tns1:signed&gt;&lt;xsl:value-of select="signed"/&gt;&lt;/tns1:signed&gt;&lt;/xsl:if&gt;&lt;tns1:price&gt;&lt;xsl:value-of select="xsd:float(price)"/&gt;&lt;/tns1:price&gt;&lt;/tns1:Book&gt;&lt;/xsl:for-each&gt;&lt;/tns1:Books&gt;&lt;/parameters&gt;&lt;/tns:getAllBooksResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20140929140236" xmlns:tns1="http://www.example.org/Books" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="2.0"&gt;&lt;xsl:param name="getBooks"/&gt;&lt;xsl:param name="Discount"/&gt;&lt;xsl:template name="getAllBooksOut-input" match="/"&gt;&lt;tns:getAllBooksResponse&gt;&lt;parameters&gt;&lt;tns1:Books&gt;&lt;xsl:for-each select="$getBooks/Record"&gt;&lt;tns1:Book&gt;&lt;xsl:if test="isbn"&gt;&lt;tns1:isbn&gt;&lt;xsl:value-of select="isbn"/&gt;&lt;/tns1:isbn&gt;&lt;/xsl:if&gt;&lt;xsl:if test="name"&gt;&lt;tns1:name&gt;&lt;xsl:value-of select="name"/&gt;&lt;/tns1:name&gt;&lt;/xsl:if&gt;&lt;xsl:if test="description"&gt;&lt;tns1:description&gt;&lt;xsl:value-of select="description"/&gt;&lt;/tns1:description&gt;&lt;/xsl:if&gt;&lt;xsl:if test="authorName"&gt;&lt;tns1:authorName&gt;&lt;xsl:value-of select="authorName"/&gt;&lt;/tns1:authorName&gt;&lt;/xsl:if&gt;&lt;xsl:if test="releaseDate"&gt;&lt;tns1:releaseDate&gt;&lt;xsl:value-of select="releaseDate"/&gt;&lt;/tns1:releaseDate&gt;&lt;/xsl:if&gt;&lt;xsl:if test="vintage"&gt;&lt;tns1:vintage&gt;&lt;xsl:value-of select="vintage"/&gt;&lt;/tns1:vintage&gt;&lt;/xsl:if&gt;&lt;xsl:if test="signed"&gt;&lt;tns1:signed&gt;&lt;xsl:value-of select="signed"/&gt;&lt;/tns1:signed&gt;&lt;/xsl:if&gt;&lt;tns1:price&gt;&lt;xsl:value-of select="xsd:float(price) * xsd:float((100.0 - $Discount) div 100)"/&gt;&lt;/tns1:price&gt;&lt;/tns1:Book&gt;&lt;/xsl:for-each&gt;&lt;/tns1:Books&gt;&lt;/parameters&gt;&lt;/tns:getAllBooksResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20140929140236&quot; xmlns:tns1=&quot;http://www.example.org/Books&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;getBooks&quot;/>&#xa;    &lt;xsl:template name=&quot;getAllBooksOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:Books>&#xa;            &lt;xsl:for-each select=&quot;$getBooks/Record&quot;>&#xa;                &lt;tns1:Book>&#xa;                    &lt;xsl:if test=&quot;isbn&quot;>&#xa;                        &lt;tns1:isbn>&#xa;                            &lt;xsl:value-of select=&quot;isbn&quot;/>&#xa;                        &lt;/tns1:isbn>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;name&quot;>&#xa;                        &lt;tns1:name>&#xa;                            &lt;xsl:value-of select=&quot;name&quot;/>&#xa;                        &lt;/tns1:name>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;description&quot;>&#xa;                        &lt;tns1:description>&#xa;                            &lt;xsl:value-of select=&quot;description&quot;/>&#xa;                        &lt;/tns1:description>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;authorName&quot;>&#xa;                        &lt;tns1:authorName>&#xa;                            &lt;xsl:value-of select=&quot;authorName&quot;/>&#xa;                        &lt;/tns1:authorName>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;releaseDate&quot;>&#xa;                        &lt;tns1:releaseDate>&#xa;                            &lt;xsl:value-of select=&quot;releaseDate&quot;/>&#xa;                        &lt;/tns1:releaseDate>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;vintage&quot;>&#xa;                        &lt;tns1:vintage>&#xa;                            &lt;xsl:value-of select=&quot;vintage&quot;/>&#xa;                        &lt;/tns1:vintage>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;signed&quot;>&#xa;                        &lt;tns1:signed>&#xa;                            &lt;xsl:value-of select=&quot;signed&quot;/>&#xa;                        &lt;/tns1:signed>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;tns1:price>&#xa;                        &lt;xsl:value-of select=&quot;xsd:float(price)&quot;/>&#xa;                    &lt;/tns1:price>&#xa;                &lt;/tns1:Book>&#xa;            &lt;/xsl:for-each>&#xa;        &lt;/tns1:Books>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20140929140236&quot; xmlns:tns1=&quot;http://www.example.org/Books&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;getBooks&quot;/>&#xa;    &lt;xsl:param name=&quot;Discount&quot;/>&#xa;    &lt;xsl:template name=&quot;getAllBooksOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:Books>&#xa;            &lt;xsl:for-each select=&quot;$getBooks/Record&quot;>&#xa;                &lt;tns1:Book>&#xa;                    &lt;xsl:if test=&quot;isbn&quot;>&#xa;                        &lt;tns1:isbn>&#xa;                            &lt;xsl:value-of select=&quot;isbn&quot;/>&#xa;                        &lt;/tns1:isbn>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;name&quot;>&#xa;                        &lt;tns1:name>&#xa;                            &lt;xsl:value-of select=&quot;name&quot;/>&#xa;                        &lt;/tns1:name>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;description&quot;>&#xa;                        &lt;tns1:description>&#xa;                            &lt;xsl:value-of select=&quot;description&quot;/>&#xa;                        &lt;/tns1:description>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;authorName&quot;>&#xa;                        &lt;tns1:authorName>&#xa;                            &lt;xsl:value-of select=&quot;authorName&quot;/>&#xa;                        &lt;/tns1:authorName>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;releaseDate&quot;>&#xa;                        &lt;tns1:releaseDate>&#xa;                            &lt;xsl:value-of select=&quot;releaseDate&quot;/>&#xa;                        &lt;/tns1:releaseDate>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;vintage&quot;>&#xa;                        &lt;tns1:vintage>&#xa;                            &lt;xsl:value-of select=&quot;vintage&quot;/>&#xa;                        &lt;/tns1:vintage>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;xsl:if test=&quot;signed&quot;>&#xa;                        &lt;tns1:signed>&#xa;                            &lt;xsl:value-of select=&quot;signed&quot;/>&#xa;                        &lt;/tns1:signed>&#xa;                    &lt;/xsl:if>&#xa;                    &lt;tns1:price>&#xa;                        &lt;xsl:value-of select=&quot;xsd:float(price) * xsd:float((100.0 - $Discount) div 100)&quot;/>&#xa;                    &lt;/tns1:price>&#xa;                &lt;/tns1:Book>&#xa;            &lt;/xsl:for-each>&#xa;        &lt;/tns1:Books>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
                                 <bpws:targets>
                                     <bpws:target linkName="JDBCQueryTogetAllBooksOut"/>
@@ -3050,6 +3124,9 @@
                                     name="getBooks"
                                     outputVariable="getBooks"
                                     tibex:xpdlId="b79e4d54-e814-42df-ad9f-52b66d2d0295" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    <bpws:targets>
+                                    <bpws:target linkName="SetDiscountTogetBooks"/>
+                                    </bpws:targets>
                                     <bpws:sources>
                                     <bpws:source linkName="JDBCQueryTogetAllBooksOut"/>
                                     </bpws:sources>
@@ -3104,6 +3181,39 @@
                                     dataType="8"
                                     status="OptionalElement" typeName="float8"/>
                                     </value>
+                                    </properties>
+                                    </activityConfig>
+                                    </bwext:BWActivity>
+                                    </tibex:config>
+                                </tibex:activityExtension>
+                            </bpws:extensionActivity>
+                            <bpws:extensionActivity>
+                                <tibex:activityExtension
+                                    expression="10.0"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"
+                                    inputVariable="Discount"
+                                    name="SetDiscount"
+                                    outputVariable="Discount"
+                                    tibex:xpdlId="e04087c8-e681-4e70-83d9-1acdc41dc0aa" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    <bpws:sources>
+                                    <bpws:source linkName="SetDiscountTogetBooks"/>
+                                    </bpws:sources>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding
+                                    expression="10.0" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                                    </tibex:inputBindings>
+                                    <tibex:config>
+                                    <bwext:BWActivity
+                                    activityTypeID="bw.generalactivities.bwassign"
+                                    xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                                    xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                                    xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                    <activityConfig>
+                                    <properties
+                                    name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//BWAssign"/>
+                                    <value
+                                    processVariable="Discount" xsi:type="generalactivities:BWAssign"/>
                                     </properties>
                                     </activityConfig>
                                     </bwext:BWActivity>
