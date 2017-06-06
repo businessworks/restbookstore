@@ -3189,7 +3189,7 @@
                             </bpws:extensionActivity>
                             <bpws:extensionActivity>
                                 <tibex:activityExtension
-                                    expression="10.0"
+                                    expression="20.0"
                                     expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"
                                     inputVariable="Discount"
                                     name="SetDiscount"
@@ -3200,7 +3200,7 @@
                                     </bpws:sources>
                                     <tibex:inputBindings>
                                     <tibex:inputBinding
-                                    expression="10.0" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                                    expression="20.0" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
                                     </tibex:inputBindings>
                                     <tibex:config>
                                     <bwext:BWActivity
