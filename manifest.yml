@@ -2,7 +2,7 @@
 applications:
 - name: "REST Book Store"
   host: restbookstore
-  buildpack: bwce_buildpack2-2
+  buildpack: bwce_buildpack2-3
   memory: 1024M
   path: tibco.bwce.sample.binding.rest.BookStore.application/target/tibco.bwce.sample.binding.rest.BookStore.application_1.0.0.ear
   timeout: 180
