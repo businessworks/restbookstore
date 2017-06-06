@@ -59,7 +59,7 @@
 		</globalVariable>
 		<globalVariable>
 			<name>//tibco.bwce.sample.binding.rest.BookStore//dbURL</name>
-			<value>#postgres.credentials.DB_URL#</value>
+			<value>#postgresql.credentials.url#</value>
 			<deploymentSettable>false</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
@@ -72,11 +72,11 @@
 			<type>Password</type>
 			<isOverride>true</isOverride>
 			<useLookupValue>true</useLookupValue>
-			<lookupValue>#postgres.credentials.DB_PASSWORD#</lookupValue>
+			<lookupValue>#postgresql.credentials.password#</lookupValue>
 		</globalVariable>
 		<globalVariable>
 			<name>//tibco.bwce.sample.binding.rest.BookStore//dbUserName</name>
-			<value>#postgres.credentials.DB_USERNAME#</value>
+			<value>#postgresql.credentials.username#</value>
 			<deploymentSettable>false</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
